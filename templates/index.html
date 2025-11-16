@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Art Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="container">
+        <h1>Generate Art in Styles You Want</h1>
+        <p>Merge the content of one image with the artistic style of another.</p>
+        <form id="art-form">
+            <div class="upload-area">
+                <div class="upload-box" id="content-drop-area">
+                    <label for="content-img">1. Content Image</label>
+                    <div class="drop-zone" id="content-drop-zone">
+                        <span class="preview-text" id="content-preview-text">Drag & Drop or Click to Upload</span>
+                        <img id="content-preview" class="preview" alt="Content Preview">
+                        <input type="file" id="content-img" accept="image/*" required style="display:none;">
+                    </div>
+                </div>
+                <div class="upload-box" id="style-drop-area">
+                    <label for="style-img">2. Style Image</label>
+                    <div class="drop-zone" id="style-drop-zone">
+                        <span class="preview-text" id="style-preview-text">Drag & Drop or Click to Upload</span>
+                        <img id="style-preview" class="preview" alt="Style Preview">
+                        <input type="file" id="style-img" accept="image/*" required style="display:none;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="slider-area">
+                <label for="style-weight-slider" style="font-weight:600;color:rgb(240,135,135);margin-bottom:0.5rem;display:block;">Style Intensity</label>
+                <input type="range" id="style-weight-slider" min="10000" max="2000000" value="1000000" step="10000" style="width:70%;">
+                <div style="margin-top:0.5rem;color:rgb(255,199,167);font-size:1rem;display:flex;justify-content:space-between;width:70%;margin-left:auto;margin-right:auto;">
+                    <span>Low</span>
+                    <span>High</span>
+                </div>
+                <div id="style-weight-value" style="margin-top:0.5rem;color:rgb(240,135,135);font-size:1.1rem;font-weight:500;">Style Weight: 1000000</div>
+            </div>
+
+            <button type="submit" id="generate-btn">Generate AI Art</button>
+        </form>
+
+        <div id="result-area" class="hidden">
+            <h2>Your Masterpiece</h2>
+            <div class="result-box">
+                <div id="loading-container">
+                    <div id="loading-spinner" class="spinner"></div>
+                    <p id="status-text"></p>
+                </div>
+                <img id="result-img" alt="Generated Art">
+            </div>
+            <div id="download-container" style="display: none;">
+                <a id="download-btn" class="download-button" download="ai-generated-art.jpg">
+                    Download Artwork
+                </a>
+            </div>
+        </div>
+    </main>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
